@@ -2,8 +2,8 @@ public class Node{
   //location and size
   int xloc = 375;
   int yloc = 300;
-  int sizex = 100;
-  int sizey = 100;
+  float sizex = 120;
+  float sizey = 80;
   boolean deleted = false;
   String heading = "\n";
   
@@ -14,12 +14,16 @@ public class Node{
   ArrayList<Node> children = new ArrayList<Node>();
  
   
-  public void inputText(char text){
+  public void inputText(char text){                            //makes Node box bigger as you type
     heading += text;
-    if(heading.length() > 81){
-     sizex+=1; 
+    if(heading.length() > 20 && heading.length() < 90){
+     sizex+=3.8;
+    }
+    else if (heading.length() > 90){
+      sizey+=0.5;
     }
   };
+  //////////////////////////implement gravity on text
   
   public void deleteText(){
     heading = heading.substring( 0, heading.length()-1 );

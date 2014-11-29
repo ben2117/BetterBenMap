@@ -6,23 +6,18 @@ ViewController viewController = new MapViewController(); //always starts as map 
 
 void setup() {
   size(800, 800);  // size always goes first!
+  smooth();
   if (frame != null) {
     frame.setResizable(true);
   }
 }
 
 void draw() {
-  background(255);
+  background(230);
   delegateMenu(); //draw the menu for the main screen, this never changes
   viewController.drawView(nodeController.loadedNodes);
 }
-
-void delegateMenu(){
-  fill(0, 102, 153);
-  rect(20, 20, 60, 30);
-  rect(90, 20, 60, 30);
-}
-
+ //<>//
 //this checks the delegate menu buttons
 boolean checkView(float x, float y){
     //changes the view controller to map or card view
@@ -45,5 +40,50 @@ boolean checkView(float x, float y){
         return true;
         
     }
+    else if(mouseX >= 160 && mouseX <= 160+60 &&
+      mouseY >= 20 && mouseY <= 20+30){
+        println("save button clicked");
+        nodeController.saveNodes();
+        return true;
+      }
       return false;
 }
+
+
+
+
+void delegateMenu(){
+  int x1 = width-150;           //variables of the zoom buttons
+  int x2 = width-80;
+  int zoomIn = width-120;
+  int zoomOut = width-55;
+  
+  if(width<450){                //prevents zoom buttons from covering rest of menu
+    x1 = 300;
+    x2 = 370;
+    zoomIn = 330;
+    zoomOut = 395;
+  }
+  
+  fill(0, 102, 153);            //menu buttons 
+  noStroke();
+  rect(20, 20, 60, 30);
+  rect(90, 20, 60, 30);
+  rect(160, 20, 60, 30);
+  rect(230, 20, 60, 30);
+  rect(x1, 20, 60, 30);
+  rect(x2, 20, 60, 30);
+  fill(255);                    //menu text
+  textSize(14);
+  text("change", 20, 35);
+  text("view", 45, 47);
+  text("new", 90, 35);
+  text("Node",105, 47);
+  text("save", 175, 41);
+  text("load", 245, 41);
+  text("zoom", x1, 35);
+  text("IN", zoomIn, 47);
+  text("zoom", x2, 35);
+  text("OUT", zoomOut, 47);
+}
+  

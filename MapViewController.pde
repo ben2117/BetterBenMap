@@ -35,7 +35,7 @@ class MapViewController extends ViewController {
       Node currentNode = loadedNoads.get(i);
       if(!currentNode.deleted){
       stroke(0);
-      fill(000, 155, 255);
+      fill(000, 204, 255);
 
       //moves node if it is being dragged
       if (currentNode == nodeController.activeNode && nodeController.activeNode.dragging) {
@@ -46,7 +46,7 @@ class MapViewController extends ViewController {
 
       //draws the line if the node has a parent
       if (currentNode.parent != null) {
-        strokeWeight(5);
+        strokeWeight(2);
         line(currentNode.parent.xloc+50, currentNode.parent.yloc+50, currentNode.xloc+50, currentNode.yloc+50);
         stroke(250);
         strokeWeight(0);
@@ -55,13 +55,21 @@ class MapViewController extends ViewController {
 
       //draws the rectangle and the text
       //rect(currentNode.xloc, currentNode.yloc, currentNode.sizex, currentNode.sizey);
-      fill(240); strokeWeight(0); stroke(250);
+      fill(255); noStroke();
       rect(currentNode.xloc, currentNode.yloc, currentNode.sizex, currentNode.sizey);
       fill(0);
       textSize(14);
-      text(currentNode.heading, currentNode.xloc, currentNode.yloc, currentNode.sizex, currentNode.sizey);
-      rect(currentNode.xloc, currentNode.yloc, 10, 10);
-      rect(currentNode.xloc + 15, currentNode.yloc, 10, 10);
+      text(currentNode.heading, currentNode.xloc+10, currentNode.yloc, currentNode.sizex-20, currentNode.sizey);
+      fill(0);
+      rect(currentNode.xloc, currentNode.yloc, 11, 11);             //cross ans plus button on Node (button and lines)
+      rect(currentNode.xloc + 15, currentNode.yloc, 11, 11);
+      stroke(255);
+      strokeWeight(2);
+      line(currentNode.xloc, currentNode.yloc,currentNode.xloc+10, currentNode.yloc+10);
+      line(currentNode.xloc+10, currentNode.yloc, currentNode.xloc, currentNode.yloc+10); //<>//
+      line(currentNode.xloc + 15, currentNode.yloc+5, currentNode.xloc + 25, currentNode.yloc+5);
+      line(currentNode.xloc + 20, currentNode.yloc, currentNode.xloc + 20, currentNode.yloc+10); //<>//
+      strokeWeight(0);
       ////////////////\\\\\\\\\\\\\\\\\\\\/////////////////\\\\\\\\\\\\\\\////////\\\\\\\\
 
       //check collisions

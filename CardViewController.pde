@@ -3,7 +3,16 @@ public class CardViewController extends ViewController {
   ArrayList<Node> mainNodes = new ArrayList<Node>();
   int mainNode;
   Node currentNode;
-  boolean flipCard = false;
+  boolean flipCard = true;
+  
+  public void generateMainList(){
+      ///////kludge solution
+      currentNode = new Node();
+      currentNode.children = (ArrayList<Node>)mainNodes.clone();
+      flipCard = true;
+  }
+  
+  
   
   public CardViewController(){
     ArrayList<Node> loadedNoads = nodeController.loadedNodes;
@@ -13,9 +22,11 @@ public class CardViewController extends ViewController {
      }
     }
     try{
-      currentNode = mainNodes.get(0);
-      mainNode = 0;
-    } catch (Exception e){};
+      //currentNode = nodeController.activeNode;///
+      //mainNode = 0;
+      generateMainList();
+      
+    } catch (Exception e){println(e);};
   }
   
   void drawView(ArrayList<Node> nodeController) {
@@ -29,8 +40,16 @@ public class CardViewController extends ViewController {
     text("Flip", 220, 145);
     fill(0);
     if(currentNode != null){
+      textSize(24);
       text(currentNode.heading, 250, 200);
     }
+    
+    fill(0, 102, 153);
+    rect(200, 210, 30, 30);
+    fill(255);
+    textSize(40);
+    text("<", 199, 236.5);
+    fill(0);
     
     if(flipCard){
       int spacex = 250;
@@ -54,8 +73,31 @@ public class CardViewController extends ViewController {
         mouseY >= 100 && mouseY <= 100+70) {
           if(flipCard == false){ flipCard = true; } else {flipCard = false;};
     }
+    
+    //allow to traverse up to parent node from < button
+    else if(mouseX >= 200 && mouseX <= 200+30 && 
+        mouseY >= 210 && mouseY <= 210+30) {
+      if(currentNode.parent != null){
+       currentNode = currentNode.parent;
+       flipCard = false;
+      }
+      
+    }
+    //return to main node list
+    else if(mouseX >= 100 && mouseX <= 180 && 
+        mouseY >= 130 && mouseY <= 100+70){
+          generateMainList();
+        }
     if(flipCard){
-      ///check for buttons
+      ///check for children nodes
+      int spacey = 300;
+      for(int i = 0; i < currentNode.children.size(); i++){
+        if(mouseY >= spacey && mouseY <= spacey+50){
+          currentNode = currentNode.children.get(i);
+          flipCard = false;
+        }
+        spacey = spacey+50;
+      }
     }
     
   }
