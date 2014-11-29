@@ -9,8 +9,26 @@
   }
   
   void keyPressed() {
-    char charactor = key;
-    nodeController.activeNode.inputText(charactor);
+    
+    if (keyCode == 8) {
+      //GO TO NODE CONTROLLER
+        print("d");
+        nodeController.activeNode.deleteText();
+    } else if (keyCode == RIGHT) { //GO TO VIEW CONTROLLER
+      viewController.right();
+    } else if (keyCode == LEFT) {
+      viewController.left();
+    }else if (keyCode == UP) { //GO TO VIEW CONTROLLER
+      viewController.up();
+    } else if (keyCode == DOWN) {
+      viewController.down();
+    }     
+    else{
+      //GO TO NODE CONTROLLER
+      char charactor = key;
+      nodeController.activeNode.inputText(charactor);
+    }
+    
   }
   
   void mousePressed() {

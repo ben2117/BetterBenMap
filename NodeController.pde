@@ -3,6 +3,7 @@ public class NodeController{
   ArrayList<Node> loadedNodes = new ArrayList<Node>();
   
  public void loadNodes(){};
+ public boolean saveNodes(){return false;};
  
  //this is called from [[benmap]]
  public void createMainNode(){
