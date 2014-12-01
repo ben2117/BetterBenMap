@@ -56,19 +56,19 @@ class MapViewController extends ViewController {
       //draws the rectangle and the text
       //rect(currentNode.xloc, currentNode.yloc, currentNode.sizex, currentNode.sizey);
       fill(255); noStroke();
-      rect(currentNode.xloc, currentNode.yloc, currentNode.sizex, currentNode.sizey);
+      rect(currentNode.xloc, currentNode.yloc, currentNode.sizex, currentNode.sizey,10);
       fill(0);
       textSize(14);
       text(currentNode.heading, currentNode.xloc+10, currentNode.yloc, currentNode.sizex-20, currentNode.sizey);
       fill(0);
-      rect(currentNode.xloc, currentNode.yloc, 11, 11);             //cross ans plus button on Node (button and lines)
-      rect(currentNode.xloc + 15, currentNode.yloc, 11, 11);
+      rect(currentNode.xloc+10, currentNode.yloc, 11, 11);             //cross ans plus button on Node (button and lines)
+      rect(currentNode.xloc + 25, currentNode.yloc, 11, 11);
       stroke(255);
       strokeWeight(2);
-      line(currentNode.xloc, currentNode.yloc,currentNode.xloc+10, currentNode.yloc+10);
-      line(currentNode.xloc+10, currentNode.yloc, currentNode.xloc, currentNode.yloc+10); //<>//
-      line(currentNode.xloc + 15, currentNode.yloc+5, currentNode.xloc + 25, currentNode.yloc+5);
-      line(currentNode.xloc + 20, currentNode.yloc, currentNode.xloc + 20, currentNode.yloc+10); //<>//
+      line(currentNode.xloc+10, currentNode.yloc,currentNode.xloc+20, currentNode.yloc+10);
+      line(currentNode.xloc+20, currentNode.yloc, currentNode.xloc, currentNode.yloc+20); //<>//
+      line(currentNode.xloc + 25, currentNode.yloc+5, currentNode.xloc + 35, currentNode.yloc+5);
+      line(currentNode.xloc + 30, currentNode.yloc, currentNode.xloc + 30, currentNode.yloc+10); //<>//
       strokeWeight(0);
       ////////////////\\\\\\\\\\\\\\\\\\\\/////////////////\\\\\\\\\\\\\\\////////\\\\\\\\
 
@@ -154,8 +154,8 @@ class MapViewController extends ViewController {
       }
 
       //click on left button
-      if (mouseX >= currentNode.xloc && mouseX <= currentNode.xloc+10 && 
-        mouseY >= currentNode.yloc && mouseY <= currentNode.yloc+10) {
+      if (mouseX >= currentNode.xloc+10 && mouseX <= currentNode.xloc+21 && 
+        mouseY >= currentNode.yloc && mouseY <= currentNode.yloc+11) {
         println("clicked on left button");
         if(nodeController.activeNode.children.size() == 0){
           nodeController.activeNode.deleted = true;
@@ -163,8 +163,8 @@ class MapViewController extends ViewController {
       }
 
       //click on right button
-      if (mouseX >= currentNode.xloc+15 && mouseX <= currentNode.xloc+25 && 
-        mouseY >= currentNode.yloc && mouseY <= currentNode.yloc+10) {
+      if (mouseX >= currentNode.xloc+25 && mouseX <= currentNode.xloc+36 && 
+        mouseY >= currentNode.yloc && mouseY <= currentNode.yloc+11) {
         println("clicked on right button");
         nodeController.activeNode.createChild();
       }
@@ -180,6 +180,16 @@ class MapViewController extends ViewController {
         currentNode.dragging = true;
       }
     }
+    
+   else if(mouseX >= width-150 && mouseX <= width-150+60 && 
+      mouseY >= 20 && mouseY <= 20+30){
+        println("Zoom IN button clicked");
+        }
+        
+   else if(mouseX >= width-80 && mouseX <= width-80+60 && 
+      mouseY >= 20 && mouseY <= 20+30){
+        println("Zoom OUT button clicked");
+        }
   }
 
   //used to end the drag of an active node
