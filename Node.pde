@@ -1,5 +1,6 @@
 public class Node{
   //location and size
+  float id;
   int xloc = 375;
   int yloc = 300;
   float sizex = 120;
@@ -10,9 +11,19 @@ public class Node{
   
   boolean dragging = false;
   
-  Node parent;
+  Node parent; 
+  
+  float parentid;
+  
   ArrayList<Node> children = new ArrayList<Node>();
  
+  public Node(float id){
+   this.id = id; 
+  }
+  
+  public Node(){
+   this.id = random(9999999);  
+  }
   
   public void inputText(char text){                            //makes Node box bigger as you type
     heading += text;

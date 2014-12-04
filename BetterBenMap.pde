@@ -45,6 +45,12 @@ boolean checkView(float x, float y){
         println("save button clicked");
         nodeController.saveNodes();
         return true;
+      }    
+    else if(mouseX >= 230 && mouseX <= 230+60 &&
+            mouseY >= 20 && mouseY <= 20+30){
+        println("load button clicked");
+        nodeController.loadedNodes();
+        return true;
       }
       return false;
 }

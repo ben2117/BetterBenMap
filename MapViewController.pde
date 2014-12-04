@@ -1,142 +1,153 @@
-class MapViewController extends ViewController {
+class MapViewController extends ViewController { //<>// //<>//
 
-  
-  void moveNodes(int x, int y){
-    ArrayList<Node> loadedNoads = nodeController.loadedNodes;
-    for (int i = loadedNoads.size()-1; i > -1; i--) {
-      Node currentNode = loadedNoads.get(i);
+
+  void moveNodes(int x, int y) {
+    ArrayList<Node> loadedNodes = nodeController.loadedNodes;
+    for (int i = loadedNodes.size ()-1; i > -1; i--) {
+      Node currentNode = loadedNodes.get(i);
       currentNode.xloc+=x;
       currentNode.yloc+=y;
     }
   }
-  void right(){
+  void right() {
     moveNodes(-10, 0);
   }
-  void left(){
+  void left() {
     moveNodes(10, 0);
   }
-  void up(){
+  void up() {
     moveNodes(0, 10);
   }
-  void down(){
+  void down() {
     moveNodes(0, -10);
   }
 
-  void drawView(ArrayList<Node> loadedNoads) {
+  void drawView(ArrayList<Node> loadedNodes) {
     textSize(32);
     fill(0, 102, 153);
     text("Map", 100, 130); 
     text("View", 110, 160);
-    
-    
-    
+
+
+
     ///for loop 
-    for (int i = loadedNoads.size()-1; i > -1; i--) {
-      Node currentNode = loadedNoads.get(i);
-      if(!currentNode.deleted){
-      stroke(0);
-      fill(000, 204, 255);
-
-      //moves node if it is being dragged
-      if (currentNode == nodeController.activeNode && nodeController.activeNode.dragging) {
-        currentNode.xloc = mouseX-40;
-        currentNode.yloc = mouseY-40;
-      }
-      ////////////////\\\\\\\\\\\\\\\\\\\\/////////////////\\\\\\\\\\\\\\\////////\\\\\\\\
-
-      //draws the line if the node has a parent
-      if (currentNode.parent != null) {
-        strokeWeight(2);
-        line(currentNode.parent.xloc+50, currentNode.parent.yloc+50, currentNode.xloc+50, currentNode.yloc+50);
-        stroke(250);
-        strokeWeight(0);
-      }
-      ////////////////\\\\\\\\\\\\\\\\\\\\/////////////////\\\\\\\\\\\\\\\////////\\\\\\\\
-
-      //draws the rectangle and the text
-      //rect(currentNode.xloc, currentNode.yloc, currentNode.sizex, currentNode.sizey);
-      fill(255); noStroke();
-      rect(currentNode.xloc, currentNode.yloc, currentNode.sizex, currentNode.sizey,10);
-      fill(0);
-      textSize(14);
-      text(currentNode.heading, currentNode.xloc+10, currentNode.yloc, currentNode.sizex-20, currentNode.sizey);
-      fill(0);
-      rect(currentNode.xloc+10, currentNode.yloc, 11, 11);             //cross ans plus button on Node (button and lines)
-      rect(currentNode.xloc + 25, currentNode.yloc, 11, 11);
-      stroke(255);
-      strokeWeight(2);
-      line(currentNode.xloc+10, currentNode.yloc,currentNode.xloc+20, currentNode.yloc+10);
-      line(currentNode.xloc+20, currentNode.yloc, currentNode.xloc, currentNode.yloc+20); //<>//
-      line(currentNode.xloc + 25, currentNode.yloc+5, currentNode.xloc + 35, currentNode.yloc+5);
-      line(currentNode.xloc + 30, currentNode.yloc, currentNode.xloc + 30, currentNode.yloc+10); //<>//
-      strokeWeight(0);
-      ////////////////\\\\\\\\\\\\\\\\\\\\/////////////////\\\\\\\\\\\\\\\////////\\\\\\\\
-
-      //check collisions
-      /*if(nodeController.activeNode != null && currentNode != nodeController.activeNode){
-        checkCollision(currentNode, nodeController.activeNode);
-        
-      }*/
-      try{
-        for (int j = loadedNoads.size()-1; j > -1; j--) {
-          if(currentNode != loadedNoads.get(j) && !loadedNoads.get(j).deleted){
-            checkCollision(currentNode, loadedNoads.get(j));
-          }
-        }
-      } catch (IndexOutOfBoundsException e){
-        System.err.println("IndexOutOfBoundsException: " + e.getMessage());
-      }
+    for (int i = loadedNodes.size ()-1; i > -1; i--) {
+      Node currentNode = loadedNodes.get(i);
       
-    }
+      
+      if (!currentNode.deleted) {
+        stroke(0);
+        fill(000, 204, 255);
+
+        //moves node if it is being dragged
+        if (currentNode == nodeController.activeNode && nodeController.activeNode.dragging) {
+          currentNode.xloc = mouseX-40;
+          currentNode.yloc = mouseY-40;
+        }
+        ////////////////\\\\\\\\\\\\\\\\\\\\/////////////////\\\\\\\\\\\\\\\////////\\\\\\\\
+
+        //draws the line if the node has a parent
+        if (currentNode.parent != null) {
+          strokeWeight(2);
+          line(currentNode.parent.xloc+50, currentNode.parent.yloc+50, currentNode.xloc+50, currentNode.yloc+50);
+          stroke(250);
+          strokeWeight(0);
+        } else {
+          for (int j = loadedNodes.size ()-1; j > -1; j--) {
+            if(currentNode.parentid == loadedNodes.get(j).id){
+              if(currentNode.parentid != 0)
+                    strokeWeight(2);
+                    line(loadedNodes.get(j).xloc+50,loadedNodes.get(j).yloc+50,currentNode.xloc+50, currentNode.yloc+50);
+                    stroke(250);
+                    strokeWeight(0);
+               }
+            }
+          }
+          
+        ////////////////\\\\\\\\\\\\\\\\\\\\/////////////////\\\\\\\\\\\\\\\////////\\\\\\\\
+
+        //draws the rectangle and the text
+        //rect(currentNode.xloc, currentNode.yloc, currentNode.sizex, currentNode.sizey);
+        fill(255); 
+        noStroke();
+        rect(currentNode.xloc, currentNode.yloc, currentNode.sizex, currentNode.sizey, 10);
+        fill(0);
+        textSize(14);
+        text(currentNode.heading, currentNode.xloc+10, currentNode.yloc, currentNode.sizex-20, currentNode.sizey);
+        fill(0);
+        rect(currentNode.xloc+10, currentNode.yloc, 11, 11);             //cross ans plus button on Node (button and lines)
+        rect(currentNode.xloc + 25, currentNode.yloc, 11, 11);
+        stroke(255);
+        strokeWeight(2);
+        line(currentNode.xloc+10, currentNode.yloc, currentNode.xloc+20, currentNode.yloc+10);
+        line(currentNode.xloc+20, currentNode.yloc, currentNode.xloc, currentNode.yloc+20);
+        line(currentNode.xloc + 25, currentNode.yloc+5, currentNode.xloc + 35, currentNode.yloc+5);
+        line(currentNode.xloc + 30, currentNode.yloc, currentNode.xloc + 30, currentNode.yloc+10);
+        strokeWeight(0);
+        ////////////////\\\\\\\\\\\\\\\\\\\\/////////////////\\\\\\\\\\\\\\\////////\\\\\\\\
+
+        //check collisions
+        /*if(nodeController.activeNode != null && currentNode != nodeController.activeNode){
+         checkCollision(currentNode, nodeController.activeNode);
+         
+         }*/
+        try {
+          for (int j = loadedNodes.size ()-1; j > -1; j--) {
+            if (currentNode != loadedNodes.get(j) && !loadedNodes.get(j).deleted) {
+              checkCollision(currentNode, loadedNodes.get(j));
+            }
+          }
+        } 
+        catch (IndexOutOfBoundsException e) {
+          System.err.println("IndexOutOfBoundsException: " + e.getMessage());
+        }
+      }
     }
   }
-  
-  void checkCollision(Node currentNode, Node activeNode){
-      float x = currentNode.xloc; 
-      float y = currentNode.yloc;
-      float bx = activeNode.xloc;
-      float by = activeNode.yloc;
-      float myX2 = currentNode.xloc + currentNode.sizex;
-      float myY2 = currentNode.yloc + currentNode.sizey;
-      float otherX2 = activeNode.xloc + nodeController.activeNode.sizex;
-      float otherY2 = activeNode.yloc + activeNode.sizey;
-      // If this box is entirely to the left of box b, then there is no collision.  
-      if (x < bx && myX2 < bx) return;
 
-      // If this box is entirely to the right of box b, then there is no collision.
-      if (x > otherX2 && myX2 > otherX2) {
-       
-        return;
-      }
+  void checkCollision(Node currentNode, Node activeNode) {
+    float x = currentNode.xloc; 
+    float y = currentNode.yloc;
+    float bx = activeNode.xloc;
+    float by = activeNode.yloc;
+    float myX2 = currentNode.xloc + currentNode.sizex;
+    float myY2 = currentNode.yloc + currentNode.sizey;
+    float otherX2 = activeNode.xloc + nodeController.activeNode.sizex;
+    float otherY2 = activeNode.yloc + activeNode.sizey;
+    // If this box is entirely to the left of box b, then there is no collision.  
+    if (x < bx && myX2 < bx) return;
 
-      // If this box is entirely above box b, then there is no collision.
-      if (y < by && myY2 < by) {
-        
-        return;
-      }
+    // If this box is entirely to the right of box b, then there is no collision.
+    if (x > otherX2 && myX2 > otherX2) {
 
-      // If this box is entirely below box b, then there is no collision.
-      if (y > otherY2 && myY2 > otherY2) {
-        
-        return;
-      }
+      return;
+    }
 
-      // If we reach this point, the boxes haven't missed each other.
-      // Therefore, there must be a collision.
-      //println("hit");
-      if(x >= bx){
-        currentNode.xloc+=2;
-      }
-      else{
-        currentNode.xloc-=2;
-      }
-      if(y >= by){
-        currentNode.yloc+=2;
-      }
-      else{
-        currentNode.yloc-=2;
-      }
-    
+    // If this box is entirely above box b, then there is no collision.
+    if (y < by && myY2 < by) {
+
+      return;
+    }
+
+    // If this box is entirely below box b, then there is no collision.
+    if (y > otherY2 && myY2 > otherY2) {
+
+      return;
+    }
+
+    // If we reach this point, the boxes haven't missed each other.
+    // Therefore, there must be a collision.
+    //println("hit");
+    if (x >= bx) {
+      currentNode.xloc+=2;
+    } else {
+      currentNode.xloc-=2;
+    }
+    if (y >= by) {
+      currentNode.yloc+=2;
+    } else {
+      currentNode.yloc-=2;
+    }
   }
 
   void mouseInput(float x, float y) {
@@ -147,7 +158,6 @@ class MapViewController extends ViewController {
       if (mouseX >= currentNode.xloc && mouseX <= currentNode.xloc+currentNode.sizex && 
         mouseY >= currentNode.yloc && mouseY <= currentNode.yloc+currentNode.sizey) {
         if (nodeController.activeNode == currentNode) {
-        
         } else {
           nodeController.activeNode = currentNode;
         }
@@ -157,7 +167,7 @@ class MapViewController extends ViewController {
       if (mouseX >= currentNode.xloc+10 && mouseX <= currentNode.xloc+21 && 
         mouseY >= currentNode.yloc && mouseY <= currentNode.yloc+11) {
         println("clicked on left button");
-        if(nodeController.activeNode.children.size() == 0){
+        if (nodeController.activeNode.children.size() == 0) {
           nodeController.activeNode.deleted = true;
         }
       }
@@ -179,17 +189,13 @@ class MapViewController extends ViewController {
         mouseY >= currentNode.yloc+10 && mouseY <= currentNode.yloc+currentNode.sizey) {
         currentNode.dragging = true;
       }
+    } else if (mouseX >= width-150 && mouseX <= width-150+60 && 
+      mouseY >= 20 && mouseY <= 20+30) {
+      println("Zoom IN button clicked");
+    } else if (mouseX >= width-80 && mouseX <= width-80+60 && 
+      mouseY >= 20 && mouseY <= 20+30) {
+      println("Zoom OUT button clicked");
     }
-    
-   else if(mouseX >= width-150 && mouseX <= width-150+60 && 
-      mouseY >= 20 && mouseY <= 20+30){
-        println("Zoom IN button clicked");
-        }
-        
-   else if(mouseX >= width-80 && mouseX <= width-80+60 && 
-      mouseY >= 20 && mouseY <= 20+30){
-        println("Zoom OUT button clicked");
-        }
   }
 
   //used to end the drag of an active node

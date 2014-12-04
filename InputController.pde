@@ -16,6 +16,7 @@
         nodeController.activeNode.deleteText();
     } else if (keyCode == RIGHT) { //GO TO VIEW CONTROLLER
       viewController.right();
+      //println(nodeController.loadedNodes.get(0).children.get(1).id);
     } else if (keyCode == LEFT) {
       viewController.left();
     }else if (keyCode == UP) { //GO TO VIEW CONTROLLER

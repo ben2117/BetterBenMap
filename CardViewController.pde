@@ -26,7 +26,9 @@ public class CardViewController extends ViewController {
       //mainNode = 0;
       generateMainList();
       
-    } catch (Exception e){println(e);};
+    } catch (Exception e){
+      println(e);
+    }
   }
   
   void drawView(ArrayList<Node> nodeController) {
