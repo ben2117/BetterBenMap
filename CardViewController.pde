@@ -133,6 +133,7 @@ public class CardViewController extends ViewController {
       }
     
     //allow to traverse up to parent node from < button
+    ////////////////////does not work for loaded nodes!!!!!! FIX!!!!
     else if(mouseX >= 200 && mouseX <= 200+30 && 
         mouseY >= 210 && mouseY <= 210+30) {
       if(currentNode.parent != null){
@@ -143,7 +144,8 @@ public class CardViewController extends ViewController {
     }
     //return to main node list
     else if(mouseX >= 100 && mouseX <= 180 && 
-        mouseY >= 130 && mouseY <= 100+70){
+        mouseY >= 100 && mouseY <= 100+70){
+          println("back to main menu");
           generateMainList();
         }
     if(flipCard){
