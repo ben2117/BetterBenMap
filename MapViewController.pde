@@ -189,14 +189,8 @@ class MapViewController extends ViewController { //<>// //<>//
         mouseY >= currentNode.yloc+10 && mouseY <= currentNode.yloc+currentNode.sizey) {
         currentNode.dragging = true;
       }
-    } else if (mouseX >= width-150 && mouseX <= width-150+60 && 
-      mouseY >= 20 && mouseY <= 20+30) {
-      println("Zoom IN button clicked");
-    } else if (mouseX >= width-80 && mouseX <= width-80+60 && 
-      mouseY >= 20 && mouseY <= 20+30) {
-      println("Zoom OUT button clicked");
-    }
   }
+}
 
   //used to end the drag of an active node
   void mouseUp(int x, int y) {

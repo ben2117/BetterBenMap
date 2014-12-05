@@ -23,29 +23,43 @@ boolean checkView(float x, float y){
     //changes the view controller to map or card view
    if (mouseX >= 20 && mouseX <= 20+60 && 
       mouseY >= 20 && mouseY <= 20+30){
-        if(viewController instanceof MapViewController){
+       if(viewController instanceof MapViewController){
           viewController = new CardViewController();
         }
         else{
           viewController = new MapViewController();
         }
-      println("View has been changed");
-      return true;  
+       println("View has been changed");
+       return true; 
+       } 
+    //Zoom IN button 
+    //Should be switched off in CardView
+    else if (mouseX >= width-150 && mouseX <= width-150+60 &&      
+      mouseY >= 20 && mouseY <= 20+30) {
+      println("Zoom IN button clicked");
+    }
+    //Zoom OUT button  
+    //Should be switched off in CardView
+    else if (mouseX >= width-80 && mouseX <= width-80+60 && 
+      mouseY >= 20 && mouseY <= 20+30) {
+      println("Zoom OUT button clicked");
     }
     //creates a new main node
+    //Should be switched off in CardView
     else if (mouseX >= 90 && mouseX <= 90+60 && 
       mouseY >= 20 && mouseY <= 20+30){
         nodeController.createMainNode();
         println("A new node has been created");
-        return true;
-        
+        return true;   
     }
+    //save button
     else if(mouseX >= 160 && mouseX <= 160+60 &&
       mouseY >= 20 && mouseY <= 20+30){
         println("save button clicked");
         nodeController.saveNodes();
         return true;
-      }    
+      } 
+    //load button   
     else if(mouseX >= 230 && mouseX <= 230+60 &&
             mouseY >= 20 && mouseY <= 20+30){
         println("load button clicked");
@@ -54,8 +68,6 @@ boolean checkView(float x, float y){
       }
       return false;
 }
-
-
 
 
 void delegateMenu(){

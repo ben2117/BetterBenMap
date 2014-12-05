@@ -46,20 +46,23 @@ public class CardViewController extends ViewController {
       text(currentNode.heading, 250, 200);
     }
     
-    fill(0, 102, 153);                             ////////return to previous Card
+    ////////return to previous Card
+    fill(0, 102, 153);                             
     rect(200, 210, 30, 30);
     fill(255);
     textSize(40);
     text("<", 199, 236.5);
     fill(0);
-    
-    fill(0, 102, 153);                            /////////buttons to decide how relevant a Card is
+
+    //irrelevant button
+    fill(0, 102, 153);                            
     rect(20, 300, 80, 30);
     fill(255);
     textSize(14);
     text("irrelevant",25, 321);
     fill(0);
     
+    //learn button
     fill(0, 102, 153);
     rect(20, 340, 80, 30);
     fill(255);
@@ -67,6 +70,7 @@ public class CardViewController extends ViewController {
     text("learn",25, 361);
     fill(0);
         
+    //revise button    
     fill(0, 102, 153);
     rect(20, 380, 80, 30);
     fill(255);
@@ -74,31 +78,26 @@ public class CardViewController extends ViewController {
     text("revise",25, 401);
     fill(0);
     
+    //mastered button
     fill(0, 102, 153);
     rect(20, 420, 80, 30);
     fill(255);
     textSize(14);
     text("mastered",25, 441);
     fill(0);
-    
-    
-    
-    
-    
-    
-    
-    
-    
+      
     
     if(flipCard){
       int spacex = 250;
       int spacey = 300;
       for (int i = 0; i < currentNode.children.size(); i++ ) {
         if(currentNode.children.get(i).children.size() > 0){
+          fill(0);
           textSize(20);
         }
         else{
-          textSize(16);
+          fill(153);
+          textSize(20);
         }
         text(currentNode.children.get(i).heading, spacex, spacey);
         spacey+= 50;
