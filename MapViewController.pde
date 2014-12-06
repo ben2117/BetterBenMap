@@ -48,21 +48,12 @@ class MapViewController extends ViewController { //<>// //<>//
 
         //draws the line if the node has a parent
         if (currentNode.parent != null) {
+          
           strokeWeight(2);
           line(currentNode.parent.xloc+50, currentNode.parent.yloc+50, currentNode.xloc+50, currentNode.yloc+50);
           stroke(250);
           strokeWeight(0);
-        } else {
-          for (int j = loadedNodes.size ()-1; j > -1; j--) {
-            if(currentNode.parentid == loadedNodes.get(j).id){
-              if(currentNode.parentid != 0)
-                    strokeWeight(2);
-                    line(loadedNodes.get(j).xloc+50,loadedNodes.get(j).yloc+50,currentNode.xloc+50, currentNode.yloc+50);
-                    stroke(250);
-                    strokeWeight(0);
-               }
-            }
-          }
+        }
           
         ////////////////\\\\\\\\\\\\\\\\\\\\/////////////////\\\\\\\\\\\\\\\////////\\\\\\\\
 

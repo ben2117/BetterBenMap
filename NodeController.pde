@@ -38,6 +38,7 @@ public class NodeController{
  public boolean loadedNodes(){
     JSONArray nodes = loadJSONArray("nodes.json");
     loadedNodes.clear();
+    loadedNodes = new ArrayList<Node>();
     
     for(int i = 0; i < nodes.size(); i++){
       JSONObject node = nodes.getJSONObject(i);
@@ -52,25 +53,31 @@ public class NodeController{
       
       loadedNodes.add(newNode);
       
+      
     }
    
    for(int i = loadedNodes.size()-1; i > -1; i--) {
-     
+    
      Node nenode = loadedNodes.get(i);
      
      if(nenode.parentid != 0){
        
-       for(int j = 0; j < loadedNodes.size(); j++) {
+       for(int j = loadedNodes.size()-1; j > -1; j--) {
+         
+         //println("added child " + loadedNodes.get(j).id +" to " + nenode.parentid);
          Node potentialParent = loadedNodes.get(j);
          if(nenode.parentid == potentialParent.id){
            potentialParent.children.add(nenode);
-
+           nenode.parent = potentialParent;
+           
+            println("added child " + nenode.id +" to " + potentialParent.id);
          }
        }
      }
      activeNode = loadedNodes.get(0); 
    }
-   /////----------println(loadedNodes.get(0).children.get(0).id);
+
+   
    
    return true;
  }
