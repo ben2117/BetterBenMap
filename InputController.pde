@@ -3,9 +3,10 @@
 
   void mouseClicked() {
      //[[in benmap]] changes the view controller to map or card view
-     if(!checkView(mouseX, mouseY)) 
+     if(!checkView(mouseX, mouseY)) {
        viewController.mouseInput(mouseX, mouseY);
-         ;
+         
+     };
   }
   
   void keyPressed() {

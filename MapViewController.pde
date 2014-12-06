@@ -33,8 +33,8 @@ class MapViewController extends ViewController { //<>// //<>//
     ///for loop 
     for (int i = loadedNodes.size ()-1; i > -1; i--) {
       Node currentNode = loadedNodes.get(i);
-      
-      
+
+
       if (!currentNode.deleted) {
         stroke(0);
         fill(000, 204, 255);
@@ -48,13 +48,13 @@ class MapViewController extends ViewController { //<>// //<>//
 
         //draws the line if the node has a parent
         if (currentNode.parent != null) {
-          
+
           strokeWeight(2);
           line(currentNode.parent.xloc+50, currentNode.parent.yloc+50, currentNode.xloc+50, currentNode.yloc+50);
           stroke(250);
           strokeWeight(0);
         }
-          
+
         ////////////////\\\\\\\\\\\\\\\\\\\\/////////////////\\\\\\\\\\\\\\\////////\\\\\\\\
 
         //draws the rectangle and the text
@@ -180,8 +180,8 @@ class MapViewController extends ViewController { //<>// //<>//
         mouseY >= currentNode.yloc+10 && mouseY <= currentNode.yloc+currentNode.sizey) {
         currentNode.dragging = true;
       }
+    }
   }
-}
 
   //used to end the drag of an active node
   void mouseUp(int x, int y) {
@@ -190,3 +190,22 @@ class MapViewController extends ViewController { //<>// //<>//
     }
   }
 }
+
+void mouseDragged() 
+{    
+  if (nodeController.activeNode != null) {
+    Node currentNode = nodeController.activeNode;
+    if (mouseX >= currentNode.xloc && mouseX <= currentNode.xloc+currentNode.sizex && 
+      mouseY >= currentNode.yloc+10 && mouseY <= currentNode.yloc+currentNode.sizey) {
+    } else {
+
+      for (int i = 0; i < nodeController.loadedNodes.size (); i++) {
+        Node aNode =  nodeController.loadedNodes.get(i);
+        aNode.xloc += (mouseX -pmouseX);
+        aNode.yloc += (mouseY - pmouseY);
+      }
+    }
+  }
+  
+}
+
