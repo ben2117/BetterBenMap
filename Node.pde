@@ -37,7 +37,10 @@ public class Node{
   //////////////////////////implement gravity on text
   
   public void deleteText(){
+    try{
     heading = heading.substring( 0, heading.length()-1 );
+    } catch (Exception e){};
+    
   }
   
   public void createChild(){

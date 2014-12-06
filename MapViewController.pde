@@ -9,18 +9,47 @@ class MapViewController extends ViewController { //<>// //<>//
       currentNode.yloc+=y;
     }
   }
+  
+  
+  int navigation = 0;
+  
   void right() {
-    moveNodes(-10, 0);
+    try{
+      if(nodeController.activeNode!= null){
+        navigation = 0;
+        println("navigation is " + navigation);
+        nodeController.activeNode = nodeController.activeNode.children.get(navigation);
+      }
+    } catch(Exception e) {}
   }
   void left() {
-    moveNodes(10, 0);
+    try{
+     if(nodeController.activeNode!= null){
+        nodeController.activeNode = nodeController.activeNode.parent;
+      }
+    }catch(Exception e) {}
   }
+  
   void up() {
-    moveNodes(0, 10);
+    try{
+      if(nodeController.activeNode!= null){
+        navigation += -1;
+        println("navigation is " + navigation);
+        Node nodeParent = nodeController.activeNode.parent;
+        nodeController.activeNode = nodeParent.children.get(navigation);
+      }
+    } catch(Exception e) {navigation += +1;}
   }
   void down() {
-    moveNodes(0, -10);
+   try{
+      if(nodeController.activeNode!= null){
+        navigation += +1;
+        println("navigation is " + navigation);
+        nodeController.activeNode = nodeController.activeNode.parent.children.get(navigation);
+      }
+    } catch(Exception e) {navigation += -1;}
   }
+  
 
   void drawView(ArrayList<Node> loadedNodes) {
     textSize(32);
@@ -59,8 +88,13 @@ class MapViewController extends ViewController { //<>// //<>//
 
         //draws the rectangle and the text
         //rect(currentNode.xloc, currentNode.yloc, currentNode.sizex, currentNode.sizey);
-        fill(255); 
-        noStroke();
+        fill(255);
+        if(currentNode == nodeController.activeNode){
+         stroke(50); 
+         strokeWeight(1);
+        } else {
+          noStroke();
+        }
         rect(currentNode.xloc, currentNode.yloc, currentNode.sizex, currentNode.sizey, 10);
         fill(0);
         textSize(14);
@@ -172,7 +206,7 @@ class MapViewController extends ViewController { //<>// //<>//
     }
   }
 
-  //used to drag an active node
+  //used to drag an active node ////THIS REALLY NEEDS REFRACTORYING LOOK AT MOUSE DRAG FUNCTION BELOW
   void mouseDown(int x, int y) {    
     if (nodeController.activeNode != null) {
       Node currentNode = nodeController.activeNode;

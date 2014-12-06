@@ -10,7 +10,7 @@
   }
   
   void keyPressed() {
-    
+    println(keyCode);
     if (keyCode == 8) {
       //GO TO NODE CONTROLLER
         print("d");
@@ -24,11 +24,17 @@
       viewController.up();
     } else if (keyCode == DOWN) {
       viewController.down();
-    }     
+    }
+    else if(keyCode == 18){
+      nodeController.activeNode.createChild();
+    }
     else{
       //GO TO NODE CONTROLLER
+      try{
       char charactor = key;
       nodeController.activeNode.inputText(charactor);
+      }
+      catch(Exception e) {};
     }
     
   }
