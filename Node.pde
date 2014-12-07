@@ -28,7 +28,10 @@ public class Node{
    this.id = random(9999999);  
   }
   
-  public void inputText(char text){                            //makes Node box bigger as you type
+  public void inputText(char text){    //makes Node box bigger as you type
+    if(text == 10){
+      sizey+=10;
+    }
     heading += text;
     if(heading.length() > 20 && heading.length() < 90){
      sizex+=3.8;
