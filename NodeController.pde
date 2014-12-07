@@ -1,12 +1,31 @@
+     void folderSelectedSave(File selection) {
+      if (selection == null) {
+        println("Window was closed or the user hit cancel.");
+      } else {
+        nodeController.saveNodes(selection);
+        println("User selected " + selection.getAbsolutePath());
+      }
+    }
+    
+    void folderSelectedLoad(File selection) {
+      if (selection == null) {
+        println("Window was closed or the user hit cancel.");
+      } else {
+        nodeController.loadedNodes(selection);
+        println("User selected " + selection.getAbsolutePath());
+      }
+    }
+    
+
 JSONObject json;
 
 public class NodeController{
   Node activeNode;
   ArrayList<Node> loadedNodes = new ArrayList<Node>();
  
- public boolean saveNodes(){
+ public boolean saveNodes(File selection){
     JSONArray nodes = new JSONArray();
-    
+
     for (int i = loadedNodes.size()-1; i > -1; i--) {
       Node ln = loadedNodes.get(i);
       if(!ln.deleted){
@@ -31,13 +50,15 @@ public class NodeController{
     
     //json = new JSONObject();
     //json.setJSONArray("nodes", nodes);
-    saveJSONArray(nodes, "nodes.json");
+    //println(selection.getAbsolutePath()+"/"+this.loadedNodes.get(0).heading+"nodes.json");
+     String x = "/"+loadedNodes.get(0).heading.trim();
+     saveJSONArray(nodes, selection.getAbsolutePath()+x+".btbmap");
     
     return true;
  }
  
- public boolean loadedNodes(){
-    JSONArray nodes = loadJSONArray("nodes.json");
+ public boolean loadedNodes(File selection){
+    JSONArray nodes = loadJSONArray(selection.getAbsolutePath());
     loadedNodes.clear();
     loadedNodes = new ArrayList<Node>();
     
