@@ -8,6 +8,9 @@ public class Node{
   boolean deleted = false;
   String heading = "\n";
   
+  //used to know how well you remember
+  int weighting = 100;
+  
   
   boolean dragging = false;
   

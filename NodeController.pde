@@ -18,6 +18,7 @@ public class NodeController{
         node.setFloat("sizex", ln.sizex);
         node.setFloat("sizey", ln.sizey);
         node.setString("heading", ln.heading);
+        node.setInt("weighting", ln.weighting);
         if(ln.parent != null){
           node.setFloat("parent", ln.parent.id);
         } else {
@@ -50,6 +51,8 @@ public class NodeController{
       newNode.sizey = node.getFloat("sizey");
       newNode.heading = node.getString("heading");
       newNode.parentid = node.getFloat("parent");
+      //add 10 to weighting everytime you load 
+      newNode.weighting = node.getInt("weighting") + 7;
       
       loadedNodes.add(newNode);
       
