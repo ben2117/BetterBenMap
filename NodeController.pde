@@ -48,11 +48,16 @@ public class NodeController {
         } else {
           node.setFloat("parent", 0);
         }
-
         nodes.setJSONObject(i, node);
       }
     }
-
+    
+    for(int i = 0; i < nodes.size(); i++){
+     if(nodes.getJSONObject(i) == null){
+       nodes.remove(i);
+     }
+    }
+  
     //json = new JSONObject();
     //json.setJSONArray("nodes", nodes);
     //println(selection.getAbsolutePath()+"/"+this.loadedNodes.get(0).heading+"nodes.json");
@@ -79,8 +84,8 @@ public class NodeController {
         newNode.parentid = node.getFloat("parent");
         //add 10 to weighting everytime you load 
         newNode.weighting = node.getInt("weighting") + 7;
-
-        loadedNodes.add(newNode);
+        
+          loadedNodes.add(newNode);
       
     }
 

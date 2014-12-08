@@ -27,7 +27,7 @@
     else if(keyCode == 18){
       nodeController.activeNode.createChild();
     }
-    else if(keyCode == 17){
+    else if(keyCode == 9){
       nodeController.activeNode.parent.createChild();
     }
     else{
