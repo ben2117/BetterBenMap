@@ -24,9 +24,38 @@ JSONObject json;
 //// There are problems with loading due to nulls in the json file and 
 //// There are problems with crazy charactors getting saved in the json file
 
+
+
+
 public class NodeController {
   Node activeNode;
   ArrayList<Node> loadedNodes = new ArrayList<Node>();
+
+
+
+    private String sanatizeString(String heading){
+       
+      ////SANATIZING THE FUCKING FUCK FUCK STRING
+        
+        String[] st1 = splitTokens(heading);
+        for(int h = 0; h < st1.length; h++){
+         if(!(st1[h].matches("[^\"[a-zA-Z]\n]*"))){
+           st1[h] = "\n";
+         }
+        }
+        
+        
+        StringBuilder builder = new StringBuilder();
+        for(String s : st1) {
+            builder.append(s);
+        }
+        String x = builder.toString();
+        ///end sanatizing said string
+        
+        return heading;
+    }
+
+
 
   public boolean saveNodes(File selection) {
     JSONArray nodes = new JSONArray();
@@ -41,7 +70,12 @@ public class NodeController {
         node.setInt("yloc", ln.yloc);
         node.setFloat("sizex", ln.sizex);
         node.setFloat("sizey", ln.sizey);
-        node.setString("heading", ln.heading);
+        
+      
+        String x = sanatizeString(ln.heading);
+        node.setString("heading", x);
+
+        
         node.setInt("weighting", ln.weighting);
         if (ln.parent != null) {
           node.setFloat("parent", ln.parent.id);
@@ -61,7 +95,12 @@ public class NodeController {
     //json = new JSONObject();
     //json.setJSONArray("nodes", nodes);
     //println(selection.getAbsolutePath()+"/"+this.loadedNodes.get(0).heading+"nodes.json");
-    String x = "/"+loadedNodes.get(0).heading.trim();
+    
+    
+    //try and sanatize the sanatization so that it works with file directory by sanatizing trimming and removing new lines
+    String y = "/"+sanatizeString(loadedNodes.get(0).heading);
+    String x = y.trim();
+    x = x.replace("\n", "");
     saveJSONArray(nodes, selection.getAbsolutePath()+x+".btbmap");
 
     return true;
@@ -80,6 +119,7 @@ public class NodeController {
         newNode.yloc = node.getInt("yloc");
         newNode.sizex = node.getFloat("sizex");
         newNode.sizey = node.getFloat("sizey");
+        
         newNode.heading = node.getString("heading");
         newNode.parentid = node.getFloat("parent");
         //add 10 to weighting everytime you load 

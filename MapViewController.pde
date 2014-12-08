@@ -164,14 +164,14 @@ class MapViewController extends ViewController { //<>// //<>//
     // Therefore, there must be a collision.
     //println("hit");
     if (x >= bx) {
-      currentNode.xloc+=2;
+      currentNode.xloc+=5;
     } else {
-      currentNode.xloc-=2;
+      currentNode.xloc-=5;
     }
     if (y >= by) {
-      currentNode.yloc+=2;
+      currentNode.yloc+=5;
     } else {
-      currentNode.yloc-=2;
+      currentNode.yloc-=5;
     }
   }
 
