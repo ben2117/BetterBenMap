@@ -104,10 +104,10 @@ class MapViewController extends ViewController { //<>// //<>//
         rect(currentNode.xloc + 25, currentNode.yloc, 11, 11);
         stroke(255);
         strokeWeight(2);
-        line(currentNode.xloc+10, currentNode.yloc, currentNode.xloc+20, currentNode.yloc+10);
-        line(currentNode.xloc+20, currentNode.yloc, currentNode.xloc, currentNode.yloc+20);
-        line(currentNode.xloc + 25, currentNode.yloc+5, currentNode.xloc + 35, currentNode.yloc+5);
-        line(currentNode.xloc + 30, currentNode.yloc, currentNode.xloc + 30, currentNode.yloc+10);
+        line(currentNode.xloc+10, currentNode.yloc+1, currentNode.xloc+20, currentNode.yloc+10);
+        line(currentNode.xloc+20, currentNode.yloc+1, currentNode.xloc+10, currentNode.yloc+10);
+        line(currentNode.xloc + 25, currentNode.yloc+6, currentNode.xloc + 36, currentNode.yloc+6);
+        line(currentNode.xloc + 30.5, currentNode.yloc+1, currentNode.xloc + 30.5, currentNode.yloc+11);
         strokeWeight(0);
         ////////////////\\\\\\\\\\\\\\\\\\\\/////////////////\\\\\\\\\\\\\\\////////\\\\\\\\
 
