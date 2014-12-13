@@ -64,7 +64,7 @@ boolean checkView(float x, float y){
     else if(mouseX >= 230 && mouseX <= 230+60 &&
             mouseY >= 20 && mouseY <= 20+30){
         println("load button clicked");
-        selectFolder("Select a folder to process:", "folderSelectedLoad" );
+        selectInput("Select a folder to process:", "folderSelectedLoad" );
         //nodeController.loadedNodes();
         return true;
       }
