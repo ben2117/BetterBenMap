@@ -100,6 +100,8 @@ class MapViewController extends ViewController { //<>// //<>//
         textSize(14);
         text(currentNode.heading, currentNode.xloc+10, currentNode.yloc, currentNode.sizex-20, currentNode.sizey);
         fill(0);
+        stroke(0);
+        strokeWeight(1);
         rect(currentNode.xloc+10, currentNode.yloc, 11, 11);             //cross ans plus button on Node (button and lines)
         rect(currentNode.xloc + 25, currentNode.yloc, 11, 11);
         stroke(255);
