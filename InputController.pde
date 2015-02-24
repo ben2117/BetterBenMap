@@ -39,6 +39,11 @@
       catch(Exception e) {};
     }
     
+    if ( key == 'c' ) {
+        viewController = new ScreenShotViewController();
+        //takeScreenShot();
+    }
+    
   }
   
   void mousePressed() {
