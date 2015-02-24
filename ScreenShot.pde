@@ -7,24 +7,56 @@ PImage screenShot;
 
 public class ScreenShotViewController extends ViewController {
   
+  boolean selecting = false;
+  int startPointx; int startPointy;
+  int endPointx; int endPointy;
+  
   ScreenShotViewController() {
     size( displayWidth, displayHeight );
     background( 0 );
-    takeScreenShot();
+    takeInitScreenShot();
     
   }
   
   void drawView(ArrayList<Node> loadedNodes){
     
     background( 0 );
-    image( screenShot, 0, 0 ); 
+    image( screenShot, 0, 0 );
+    if(selecting){
+      fill(15);
+      rectMode(CORNERS);
+      rect(startPointx, startPointy, mouseX, mouseY); 
+    }
   }
+  
+  void mouseDown(int x, int y){
+    selecting = true;
+    startPointx = x;
+    startPointy = y;
+  
+  };
+  void mouseUp(int x, int y){
+    endPointx = x;
+    endPointy = y;
+    selecting = false;
+    takeFinScreenShot();
+  };
+  
+  void takeFinScreenShot(){
+    background( 0 );
+    image( screenShot, 0, 0 );
+    screenShot = get(startPointx, startPointy, startPointx + endPointx, startPointy + endPointy);
+  }
+  
   
 }
 
-void takeScreenShot()
+
+
+
+void takeInitScreenShot()
 {
-    frame.setLocation(9999999,9999999);
+    frame.setLocation(displayWidth+20,displayHeight+20);
     delay(100);
     Rectangle screenRect = new Rectangle( Toolkit.getDefaultToolkit().getScreenSize() );
     
